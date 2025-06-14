@@ -26,8 +26,11 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run Chatbot Tests
-      # Cần cung cấp API key cho các bài test chạy trên GitHub Actions
       env:
         GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
       run: |
+        if [ -z "${GOOGLE_API_KEY}" ]; then
+          echo "GOOGLE_API_KEY is not set. Please add it to your repository secrets."
+          exit 1
+        fi
         python test_flows.py
