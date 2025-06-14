@@ -1,36 +1,22 @@
-#.github/workflows/ci.yml
-
-name: Chatbot CI Pipeline
+name: CI
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+
+    env:
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Run Chatbot Tests
-      env:
-        GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-      run: |
-        if [ -z "${GOOGLE_API_KEY}" ]; then
-          echo "GOOGLE_API_KEY is not set. Please add it to your repository secrets."
-          exit 1
-        fi
-        python test_flows.py
+      - name: Run tests
+        run: pytest

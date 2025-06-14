@@ -17,7 +17,7 @@ def search_trips_api(origin: str, destination: str, date: str) -> dict:
         "success": True,
         "trips":[
             {
-                "trip_id": "TRIP001",
+                "trip_id": "VRX001",
                 "bus_company": "Xe Hoàng Long",
                 "departure_time": f"{date} 07:00",
                 "arrival_time": f"{date} 13:00",
@@ -25,7 +25,7 @@ def search_trips_api(origin: str, destination: str, date: str) -> dict:
                 "seats_available": 8
             },
             {
-                "trip_id": "TRIP002",
+                "trip_id": "VRX002",
                 "bus_company": "Xe Mai Linh",
                 "departure_time": f"{date} 09:30",
                 "arrival_time": f"{date} 15:00",
@@ -33,7 +33,7 @@ def search_trips_api(origin: str, destination: str, date: str) -> dict:
                 "seats_available": 12
             },
             {
-                "trip_id": "TRIP003",
+                "trip_id": "VRX003",
                 "bus_company": "Xe Phương Trang",
                 "departure_time": f"{date} 13:00",
                 "arrival_time": f"{date} 18:30",

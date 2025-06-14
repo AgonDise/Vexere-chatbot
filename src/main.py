@@ -9,8 +9,8 @@ from langchain_chroma import Chroma
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
-from state import ConversationState
-from services import (
+from .state import ConversationState
+from .services import (
     change_ticket_time_api, 
     search_trips_api, 
     create_booking_api,
