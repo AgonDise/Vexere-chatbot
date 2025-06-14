@@ -1,7 +1,5 @@
 # Vexere AI Chatbot - POC
 
-Đây là dự án Proof-of-Concept (POC) cho hệ thống AI Chatbot của Vexere, đáp ứng các yêu cầu trong bài test tuyển dụng vị trí AI Engineer.
-
 ## Tính năng chính
 
 * **L1 - FAQ:** Trả lời câu hỏi thường gặp sử dụng kỹ thuật RAG (Retrieval-Augmented Generation). Dữ liệu được lấy từ file `faq_vexere.csv`.
