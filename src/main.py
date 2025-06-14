@@ -1,5 +1,3 @@
-# src/main.py
-
 import os
 from dotenv import load_dotenv
 
@@ -14,10 +12,9 @@ from .services import (
     change_ticket_time_api, 
     search_trips_api, 
     create_booking_api,
-    process_ticket_image # MỚI
+    process_ticket_image
 )
 
-# Tải các biến môi trường
 load_dotenv()
 
 class Chatbot:
@@ -55,13 +52,11 @@ class Chatbot:
         """
         active_flow = self.state.current_flow
 
-        # --- Xử lý các luồng đang hoạt động ---
         if active_flow == 'book_ticket':
             return self._handle_booking_flow(user_input)
         elif active_flow == 'change_ticket_time':
             return self._handle_change_ticket_flow(user_input)
         
-        # --- Xử lý các yêu cầu mới (không có luồng nào đang hoạt động) ---
         else:
             if any(keyword in user_input.lower() for keyword in ["đặt vé", "mua vé"]):
                 self.state.start_flow('book_ticket')
@@ -69,25 +64,21 @@ class Chatbot:
             elif any(keyword in user_input.lower() for keyword in ["đổi giờ", "đổi vé"]):
                 self.state.start_flow('change_ticket_time')
                 return "Chắc chắn rồi. Vui lòng cho tôi biết mã vé của bạn."
-            # MỚI: Xử lý yêu cầu gửi ảnh
             elif any(keyword in user_input.lower() for keyword in ["gửi ảnh", "ảnh vé"]):
                 return self._handle_image_submission()
             else:
-                # Mặc định là xử lý FAQ
                 result = self.rag_chain.invoke({"query": user_input})
                 return result['result']
 
     def _handle_image_submission(self):
         """Mô phỏng luồng xử lý khi người dùng gửi ảnh."""
-        # Giả sử chúng ta nhận được dữ liệu ảnh
         mock_image_data = b"some_image_bytes"
         result = process_ticket_image(mock_image_data)
 
         if result.get("success"):
-            # Bắt đầu luồng đổi vé và điền sẵn thông tin
             self.state.start_flow('change_ticket_time')
             self.state.slots['booking_code'] = result['booking_code']
-            self.state.transition_to('AWAITING_NEW_TIME') # Chuyển thẳng đến bước hỏi giờ mới
+            self.state.transition_to('AWAITING_NEW_TIME') 
             return f"Tôi thấy mã vé của bạn là {result['booking_code']}. Bạn muốn đổi vé sang mấy giờ?"
         else:
             return "Rất tiếc, tôi không thể đọc được thông tin từ ảnh của bạn. Vui lòng nhập mã vé thủ công."
@@ -169,7 +160,6 @@ class Chatbot:
             self.state.reset()
             return result['message']
         
-        # Thêm một fallback mặc định cho luồng
         return "Xin lỗi, tôi chưa hiểu ý bạn. Chúng ta đang trong quá trình đặt vé."
 
 def interactive_chat():

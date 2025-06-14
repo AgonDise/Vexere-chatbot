@@ -1,13 +1,11 @@
-# src/state.py
-
 class ConversationState:
     """
     Quản lý trạng thái của cuộc hội thoại, bao gồm cả luồng và trạng thái hiện tại.
     """
     def __init__(self):
-        self.current_flow = None      # Luồng hiện tại, ví dụ: 'change_ticket_time', 'book_ticket'
-        self.current_state = None     # Trạng thái cụ thể trong luồng, ví dụ: 'AWAITING_ORIGIN'
-        self.slots = {}               # Nơi lưu trữ thông tin thu thập được
+        self.current_flow = None      
+        self.current_state = None   
+        self.slots = {}  
 
     def start_flow(self, flow_name: str):
         """MỚI: Bắt đầu một luồng mới và đặt trạng thái ban đầu."""
