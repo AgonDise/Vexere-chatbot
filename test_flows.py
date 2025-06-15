@@ -2,7 +2,6 @@ import unittest
 import os
 import sys
 
-# Thêm thư mục gốc của dự án vào sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.main import Chatbot
@@ -33,7 +32,6 @@ class TestChatbotPipeline(unittest.TestCase):
         print("\n>>> Bắt đầu kiểm thử: Luồng FAQ (L1)")
         user_input = "Tôi có thể mang thú cưng lên xe không?"
         
-        # SỬA VẤN ĐỀ 1: Thêm các lệnh print để thấy rõ quá trình
         print(f"    - User: '{user_input}'")
         response = self.chatbot.get_response(user_input)
         print(f"    - Bot: '{response}'")
@@ -64,7 +62,6 @@ class TestChatbotPipeline(unittest.TestCase):
         """Kiểm thử luồng L3: Đặt vé xe với đầy đủ thông tin hành khách."""
         print("\n>>> Bắt đầu kiểm thử: Luồng Đặt Vé (L3) - Mở rộng")
         
-        # SỬA LỖI: Cập nhật toàn bộ kịch bản test L3 cho đúng với logic thực tế
         steps = [
             ("đặt vé", "Rất sẵn lòng! Bạn muốn đặt vé xe khách hay máy bay?"),
             ("xe khách", "Tuyệt vời! Bạn muốn đi từ đâu?"),
@@ -73,7 +70,7 @@ class TestChatbotPipeline(unittest.TestCase):
             ("25-12-2025", "Tôi đã tìm thấy các chuyến đi sau cho bạn:\n- Chuyến VRX001: khởi hành lúc 25-12-2025 07:00, giá 220000\n- Chuyến VRX002: khởi hành lúc 25-12-2025 09:30, giá 250000\n- Chuyến VRX003: khởi hành lúc 25-12-2025 13:00, giá 240000\nVui lòng chọn mã chuyến đi bạn muốn đặt (ví dụ: VXR01)."),
             ("VRX001", "Cảm ơn bạn. Vui lòng cho tôi biết tên đầy đủ của hành khách."),
             ("nguyễn cao chánh", "Vui lòng cung cấp số điện thoại liên lạc của bạn."),
-            ("0379009341", "Đặt vé thành công! Mã đặt chỗ của bạn là") # Chỉ cần kiểm tra phần đầu của câu cuối
+            ("0379009341", "Đặt vé thành công! Mã đặt chỗ của bạn là")
         ]
         
         for i, (user_input, expected_response) in enumerate(steps):
@@ -81,7 +78,6 @@ class TestChatbotPipeline(unittest.TestCase):
             actual_response = self.chatbot.get_response(user_input)
             print(f"    - Bot: '{actual_response}'")
             
-            # Với câu trả lời cuối cùng có mã vé ngẫu nhiên, chỉ kiểm tra phần đầu
             if "Mã đặt chỗ của bạn là" in expected_response:
                 self.assertIn(expected_response, actual_response)
             else:
