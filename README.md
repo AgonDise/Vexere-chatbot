@@ -3,17 +3,17 @@
 ## Tính năng chính
 
 * **L1 - FAQ:** Trả lời câu hỏi thường gặp sử dụng kỹ thuật RAG (Retrieval-Augmented Generation). Dữ liệu được lấy từ file `faq_vexere.csv`.
-* **L2 - After-Service:** Xử lý nghiệp vụ **Đổi giờ vé**.
-* **L3 - Đặt vé (Bonus):** Hỗ trợ người dùng thực hiện luồng đặt vé hoàn chỉnh.
-* **Kiến trúc mở rộng:** Sẵn sàng tích hợp xử lý **Image** và **Voice** qua các hàm chờ trong `src/services.py`.
-* **Kiểm thử tự động:** Tích hợp bộ test case cho các luồng hội thoại trong `test_flows.py` và pipeline CI với GitHub Actions.
+* **L2 - After-Service:** Xử lý task **Đổi giờ vé**.
+* **L3 - Đặt vé:** Hỗ trợ người dùng thực hiện luồng đặt vé hoàn chỉnh.
+* **Extended for Image and Voices:** Sẵn sàng tích hợp xử lý **Image** và **Voice** qua các hàm chờ trong `src/services.py`. (API giả lập dữ liệu từ Image đã được xử lý qua OCR và voice đã được xử lý thành Text.)
+* **Test pipeline CI:** Tích hợp bộ test case cho các luồng hội thoại trong `test_flows.py` và pipeline CI với GitHub Actions.
 
-## Công nghệ sử dụng
+## Frameworks/Techs Used
 
 * **Ngôn ngữ:** Python
 * **Core AI/LLM:** `langchain`, `google-generativeai`, `sentence-transformers`
 * **Vector Database:** `chromadb`
-* **Testing:** `pytest`
+* **Testing:** `test_flows.py`
 
 ## Cài đặt và Chạy dự án
 
@@ -30,13 +30,13 @@
     pip install -r requirements.txt
     ```
 
-3.  **Cấu hình API Key**
+3.  **API Key Configuration**
     Tạo file `.env` ở thư mục gốc và thêm Google API Key của bạn. File này đã được thêm vào `.gitignore` để bảo mật.
     ```bash
     echo "GOOGLE_API_KEY='your-google-api-key'" > .env
     ```
 
-4.  **Chuẩn bị dữ liệu cho RAG**
+4.  **Load Data cho RAG**
     Chạy script `load_data.py` để xử lý và nạp dữ liệu vào vector store.
     ```bash
     python load_data.py
