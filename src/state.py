@@ -1,7 +1,4 @@
 class ConversationState:
-    """
-    Quản lý trạng thái của cuộc hội thoại, bao gồm cả luồng và trạng thái hiện tại.
-    """
     def __init__(self):
         self.current_flow = None      
         self.current_state = None   

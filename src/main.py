@@ -18,17 +18,12 @@ from .services import (
 load_dotenv()
 
 class Chatbot:
-    """
-    Lớp chính để quản lý toàn bộ logic của chatbot.
-    Việc đóng gói vào một lớp giúp chúng ta dễ dàng kiểm thử (testing).
-    """
     def __init__(self):
         self.rag_chain = self._initialize_rag_chain()
         self.state = ConversationState()
         print("Chatbot đã sẵn sàng!")
 
     def _initialize_rag_chain(self):
-        """Khởi tạo chuỗi RAG để trả lời các câu hỏi FAQ."""
         print("Đang khởi tạo chuỗi RAG-FAQ...")
         llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", temperature=0)
         embeddings = HuggingFaceEmbeddings(model_name="hiieu/halong_embedding")
@@ -46,10 +41,7 @@ class Chatbot:
         return qa_chain
 
     def get_response(self, user_input: str) -> str:
-        """
-        Hàm chính để nhận đầu vào và trả về phản hồi của bot.
-        Đây là bộ điều phối trung tâm.
-        """
+        """Xử lý đầu vào của người dùng và trả về phản hồi."""
         active_flow = self.state.current_flow
 
         if active_flow == 'book_ticket':
@@ -163,7 +155,6 @@ class Chatbot:
         return "Xin lỗi, tôi chưa hiểu ý bạn. Chúng ta đang trong quá trình đặt vé."
 
 def interactive_chat():
-    """Chạy chatbot ở chế độ tương tác trong terminal."""
     if not os.getenv("GOOGLE_API_KEY"):
         print("\nLỖI: Vui lòng thiết lập GOOGLE_API_KEY trong file.env của bạn.")
         return
