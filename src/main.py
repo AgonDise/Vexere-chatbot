@@ -24,7 +24,7 @@ class Chatbot:
         print("Chatbot đã sẵn sàng!")
 
     def _initialize_rag_chain(self):
-        print("Đang khởi tạo chuỗi RAG-FAQ...")
+        print("Đang tạo chuỗi RAG-FAQ...")
         llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", temperature=0)
         embeddings = HuggingFaceEmbeddings(model_name="hiieu/halong_embedding")
         vectordb = Chroma(persist_directory="../vectordb", embedding_function=embeddings)
@@ -37,7 +37,7 @@ class Chatbot:
             llm=llm, chain_type="stuff", retriever=retriever,
             return_source_documents=False, chain_type_kwargs={"prompt": PROMPT}
         )
-        print("Khởi tạo chuỗi RAG-FAQ hoàn tất.")
+        print("Tạo chuỗi RAG-FAQ hoàn tất.")
         return qa_chain
 
     def get_response(self, user_input: str) -> str:
