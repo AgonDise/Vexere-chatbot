@@ -28,7 +28,7 @@ class Chatbot:
         print("Đang khởi tạo chuỗi RAG-FAQ...")
         llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", temperature=0)
         embeddings = HuggingFaceEmbeddings(model_name="hiieu/halong_embedding")
-        vectordb = Chroma(persist_directory="../vectordb", embedding_function=embeddings)
+        vectordb = Chroma(persist_directory="vectordb", embedding_function=embeddings)
         retriever = vectordb.as_retriever(search_kwargs={"k": 2})
         
         prompt_template = "Dựa vào thông tin sau đây để trả lời câu hỏi: {context}\n\nCâu hỏi: {question}\n\nTrả lời:"
@@ -162,7 +162,7 @@ def interactive_chat():
         return
         
     chatbot = Chatbot()
-    print("Chào mừng bạn đến với Chatbot của Vexere! (v4 - Sẵn sàng cho Đa phương tiện)")
+    print("Chào mừng bạn đến với Chatbot của Vexere!")
     print("Gõ 'thoát' để kết thúc.")
 
     while True:

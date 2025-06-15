@@ -30,15 +30,14 @@ class TestChatbotPipeline(unittest.TestCase):
     def test_l1_faq_flow(self):
         """Kiểm thử luồng L1: Trả lời câu hỏi thường gặp (FAQ)."""
         print("\n>>> Bắt đầu kiểm thử: Luồng FAQ (L1)")
-        user_input = "Tôi có thể mang thú cưng lên xe không?"
+        user_input = "Hướng dẫn check-in online?"
         
         print(f"    - User: '{user_input}'")
         response = self.chatbot.get_response(user_input)
         print(f"    - Bot: '{response}'")
 
-        self.assertTrue("thú cưng" in response.lower() or "chính sách" in response.lower(), 
-                        "Bot phải trả lời về chính sách thú cưng.")
-        print(">>> Kết thúc kiểm thử: Luồng FAQ (L1) - THÀNH CÔNG")
+        self.assertTrue("check-in online" in response or "mã đặt chỗ" in response or "PNR" in response)
+
 
     def test_l2_change_ticket_flow(self):
         """Kiểm thử luồng L2: Đổi vé xe."""
